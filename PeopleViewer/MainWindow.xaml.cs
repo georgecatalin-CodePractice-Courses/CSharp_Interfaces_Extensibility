@@ -15,33 +15,26 @@ namespace PeopleViewer
 
         private void ServiceFetchButton_Click(object sender, RoutedEventArgs e)
         {
-            ClearListBox();
-            IPersonRepository repository = new ServiceRepository();
-            var persons = repository.GetPeople();
-            foreach (var person in persons)
-            {
-                PersonListBox.Items.Add(person);
-            }
-            ShowRepositoryType(repository);
+            Populate(new ServiceRepository());
         }
 
         private void CSVFetchButton_Click(object sender, RoutedEventArgs e)
         {
-            ClearListBox();
-            IPersonRepository repository = new CSVRepository();
-            var persons = repository.GetPeople();
-            foreach (var person in persons)
-            {
-                PersonListBox.Items.Add(person);
-            }
-            ShowRepositoryType(repository);
+
+            Populate(new CSVRepository());
 
         }
 
         private void SQLFetchButton_Click(object sender, RoutedEventArgs e)
         {
+
+            Populate(new SQLRepository());
+        }
+
+        private void Populate(IPersonRepository repository)
+        {
             ClearListBox();
-            IPersonRepository repository = new SQLRepository();
+
             var persons = repository.GetPeople();
             foreach (var person in persons)
             {
