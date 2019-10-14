@@ -1,4 +1,5 @@
-﻿using PersonRepository.Interface;
+﻿using PersonRepository.CSV;
+using PersonRepository.Interface;
 using PersonRepository.Service;
 using System.Windows;
 
@@ -25,6 +26,14 @@ namespace PeopleViewer
 
         private void CSVFetchButton_Click(object sender, RoutedEventArgs e)
         {
+            ClearListBox();
+            IPersonRepository repository = new CSVRepository();
+            var persons = repository.GetPeople();
+            foreach (var person in persons)
+            {
+                PersonListBox.Items.Add(person);
+            }
+            ShowRepositoryType(repository);
 
         }
 
